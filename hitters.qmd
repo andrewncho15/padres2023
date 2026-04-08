@@ -1,26 +1,26 @@
 ---
-title: "hitters"
+title: "Were the 2023 Padres Bad or Unlucky?"
+author: "Andrew Cho"
 format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## libraries
 
 ```{r}
-1 + 1
+library(tidyverse)
 ```
 
-You can add options to executable code like this
+## read data
+# obtained via https://www.kaggle.com/datasets/mattop/san-diego-padres-batting-and-pitching-1969-2023?resource=download
 
 ```{r}
-#| echo: false
-2 * 2
+hitters <- read_csv("/Users/andrewcho/Documents/personal/SDP_batting.csv")
+```
+## filter to only 2023
+```{r}
+hitters2023 <- hitters |>
+  dplyr::filter(Year == 2023)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r}
