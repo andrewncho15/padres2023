@@ -3,6 +3,7 @@ title: "Were the 2023 Padres HittersBad or Unlucky?"
 author: "Andrew Cho"
 format: html
 editor: visual
+code-fold: true
 ---
 
 # Motivation
