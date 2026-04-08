@@ -4,6 +4,7 @@ author: "Andrew Cho"
 format: html
 editor: visual
 code-fold: true
+theme: darkly
 ---
 
 # Motivation
