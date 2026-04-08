@@ -1,26 +1,70 @@
 ---
-title: "Were the 2023 Padres Bad or Unlucky?"
+title: "Were the 2023 Padres HittersBad or Unlucky?"
 author: "Andrew Cho"
 format: html
 editor: visual
 ---
 
-## libraries
+# Motivation
+The 2023 San Diego Padres rostered, on paper, one of the best offenses in MLB history with players like Juan Soto, Fernando Tatis Jr., Manny Machado, and Xander Bogaerts leading the offense.  A team led by three hall of fame caliber players should not have finished 12 overall in OPS+ at 105.  Was it underperformance by these all-time players, lack of depth, or unluckiness?
+
+# libraries
 
 ```{r}
 library(tidyverse)
+library(baseballr)
 ```
 
-## read data
-# obtained via https://www.kaggle.com/datasets/mattop/san-diego-padres-batting-and-pitching-1969-2023?resource=download
+# read data
+### obtained via https://www.kaggle.com/datasets/mattop/san-diego-padres-batting-and-pitching-1969-2023?resource=download
 
 ```{r}
-hitters <- read_csv("/Users/andrewcho/Documents/personal/SDP_batting.csv")
+hittersbasic <- read_csv("/Users/andrewcho/Documents/personal/SDP_batting.csv")
+hitterssaber <- fg_batter_leaders(
+  startseason = 2023,
+  endseason = 2023,
+  qual = 0
+) |>
+  filter(team_name == "SDP")
 ```
-## filter to only 2023
+
+# filter basic to only 2023
 ```{r}
-hitters2023 <- hitters |>
+basic <- hittersbasic |>
   dplyr::filter(Year == 2023)
 ```
 
+# Plot woba vs xwoba
 ```{r}
+woba_plot <- hitterssaber |>
+  summarise(
+    avg_wOBA  = mean(wOBA, na.rm = TRUE),
+    avg_xwOBA = mean(xwOBA, na.rm = TRUE),
+  ) |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "metric",
+    values_to = "value"
+  ) |>
+  ggplot(aes(x = metric, y = value, group = 1)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "2023 Padres: Average wOBA vs xwOBA",
+    x = "Metric",
+    y = "Average Value"
+  ) +
+  theme_minimal()
+woba_plot
+```
+
+# Calculate the difference between xwoba and woba
+```{r}
+woba_diff <- hitterssaber |>
+  summarise(
+    diff = mean(xwOBA, na.rm = TRUE) - mean(wOBA, na.rm = TRUE)
+  ) |>
+  pull(diff)
+
+woba_diff
+```
