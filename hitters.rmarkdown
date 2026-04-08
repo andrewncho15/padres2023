@@ -1,0 +1,136 @@
+---
+title: "Were the 2023 Padres HittersBad or Unlucky?"
+author: "Andrew Cho"
+format: html
+editor: visual
+code-fold: true
+---
+
+# Motivation
+The 2023 San Diego Padres rostered, on paper, one of the best offenses in MLB history with players like Juan Soto, Fernando Tatis Jr., Manny Machado, and Xander Bogaerts leading the offense.  A team led by three hall of fame caliber players should not have finished 12 overall in OPS+ at 105.  Was it underperformance by these all-time players, lack of depth, or unluckiness?
+
+# libraries
+
+```{r}
+library(tidyverse)
+library(baseballr)
+```
+
+# read data
+### obtained via https://www.kaggle.com/datasets/mattop/san-diego-padres-batting-and-pitching-1969-2023?resource=download
+
+```{r}
+hittersbasic <- read_csv("/Users/andrewcho/Documents/personal/SDP_batting.csv")
+hitterssaber <- fg_batter_leaders(
+  startseason = 2023,
+  endseason = 2023,
+  qual = 0
+) |>
+  filter(team_name == "SDP")
+```
+
+# filter basic to only 2023
+```{r}
+basic <- hittersbasic |>
+  dplyr::filter(Year == 2023)
+```
+
+# Plot woba vs xwoba
+```{r}
+pads_plot <- hitterssaber |>
+  summarise(
+    avg_wOBA  = weighted.mean(wOBA, PA, na.rm = TRUE),
+    avg_xwOBA = weighted.mean(xwOBA, PA, na.rm = TRUE)
+  ) |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "metric",
+    values_to = "value"
+  ) |>
+  ggplot(aes(x = metric, y = value, fill = metric)) +
+  geom_col(width = 0.6) +
+  coord_cartesian(ylim = c(0.25, 0.4)) +
+  labs(
+    title = "2023 Padres: Average wOBA vs xwOBA (weighted over PAs",
+    x = "",
+    y = "Average Value"
+  ) +
+  theme_minimal()
+
+pads_plot
+```
+
+# Calculate the difference between xwoba and woba
+```{r}
+woba_diff <- hitterssaber |>
+  summarise(
+    diff = weighted.mean(xwOBA, PA, na.rm = TRUE) -
+           weighted.mean(wOBA, PA, na.rm = TRUE)
+  ) |>
+  pull(diff)
+
+woba_diff
+```
+
+# What this means:
+So far, it seems like the Padres likely encountered underperformance by their key players and not unluckiness since the difference between xwOBA and wOBA is small, but I will now compare both the Padres' xWOBA and wOBA gaps to the best offense in 2023, the Atlanta Braves.
+
+#Braves import
+```{r}
+ATLbasic <- read_csv("/Users/andrewcho/Documents/personal/SDP_batting.csv")
+ATLsaber <- fg_batter_leaders(
+  startseason = 2023,
+  endseason = 2023,
+  qual = 0
+) |>
+  filter(team_name == "ATL")
+```
+
+#Braves wOBA plot
+```{r}
+atl_plot <- ATLsaber |>
+  summarise(
+    avg_wOBA  = weighted.mean(wOBA, PA, na.rm = TRUE),
+    avg_xwOBA = weighted.mean(xwOBA, PA, na.rm = TRUE)
+  ) |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "metric",
+    values_to = "value"
+  ) |>
+  ggplot(aes(x = metric, y = value, fill = metric)) +
+  geom_col(width = 0.6) +
+  coord_cartesian(ylim = c(0.25, 0.4)) +
+  labs(
+    title = "2023 Padres: Average wOBA vs xwOBA (weighted over PAs",
+    x = "",
+    y = "Average Value"
+  ) +
+  theme_minimal()
+
+atl_plot
+```
+
+# Calculate the difference between xwoba and woba
+```{r}
+atl_diff <- ATLsaber |>
+  summarise(
+    diff = weighted.mean(xwOBA, PA, na.rm = TRUE) -
+           weighted.mean(wOBA, PA, na.rm = TRUE)
+  ) |>
+  pull(diff)
+
+atl_diff
+```
+
+#Now, lets compute the difference between the Padres and Braves
+
+```{r}
+print(woba_diff - atl_diff)
+```
+
+#What this means
+The Padres actually had a lower average woba difference between xwOBA and wOBA than the Braves suggesting that the best offense in baseball, the Braves, were actually more unlucky overall than the Padres on the wOBA level.
+
+#Conclusion
+The Padres, based on wOBA and xwOBA, were not unlucky in the 2023 season and thus cannot blame their underperformance on luck.

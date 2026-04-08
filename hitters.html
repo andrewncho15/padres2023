@@ -112,7 +112,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="libraries" class="level1">
 <h1>libraries</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.2.0     ✔ readr     2.2.0
@@ -125,7 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(baseballr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="read-data" class="level1">
@@ -133,7 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="obtained-via-httpswww.kaggle.comdatasetsmattopsan-diego-padres-batting-and-pitching-1969-2023resourcedownload" class="level3">
 <h3 class="anchored" data-anchor-id="obtained-via-httpswww.kaggle.comdatasetsmattopsan-diego-padres-batting-and-pitching-1969-2023resourcedownload">obtained via https://www.kaggle.com/datasets/mattop/san-diego-padres-batting-and-pitching-1969-2023?resource=download</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hittersbasic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/andrewcho/Documents/personal/SDP_batting.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 2431 Columns: 31
 ── Column specification ────────────────────────────────────────────────────────
@@ -144,25 +153,33 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hitterssaber <span class="ot">&lt;-</span> <span class="fu">fg_batter_leaders</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">startseason =</span> <span class="dv">2023</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">endseason =</span> <span class="dv">2023</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">qual =</span> <span class="dv">0</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team_name <span class="sc">==</span> <span class="st">"SDP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
 <section id="filter-basic-to-only-2023" class="level1">
 <h1>filter basic to only 2023</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>basic <span class="ot">&lt;-</span> hittersbasic <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2023</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="plot-woba-vs-xwoba" class="level1">
 <h1>Plot woba vs xwoba</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pads_plot <span class="ot">&lt;-</span> hitterssaber <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_wOBA  =</span> <span class="fu">weighted.mean</span>(wOBA, PA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -184,6 +201,7 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>pads_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -196,6 +214,8 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <section id="calculate-the-difference-between-xwoba-and-woba" class="level1">
 <h1>Calculate the difference between xwoba and woba</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>woba_diff <span class="ot">&lt;-</span> hitterssaber <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">diff =</span> <span class="fu">weighted.mean</span>(xwOBA, PA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span></span>
@@ -204,6 +224,7 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(diff)</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>woba_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.004427553</code></pre>
 </div>
@@ -214,7 +235,10 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <p>So far, it seems like the Padres likely encountered underperformance by their key players and not unluckiness since the difference between xwOBA and wOBA is small, but I will now compare both the Padres’ xWOBA and wOBA gaps to the best offense in 2023, the Atlanta Braves.</p>
 <p>#Braves import</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ATLbasic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/andrewcho/Documents/personal/SDP_batting.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 2431 Columns: 31
 ── Column specification ────────────────────────────────────────────────────────
@@ -225,15 +249,20 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ATLsaber <span class="ot">&lt;-</span> <span class="fu">fg_batter_leaders</span>(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">startseason =</span> <span class="dv">2023</span>,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">endseason =</span> <span class="dv">2023</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">qual =</span> <span class="dv">0</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(team_name <span class="sc">==</span> <span class="st">"ATL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>#Braves wOBA plot</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>atl_plot <span class="ot">&lt;-</span> ATLsaber <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_wOBA  =</span> <span class="fu">weighted.mean</span>(wOBA, PA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -255,6 +284,7 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>atl_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -267,6 +297,8 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <section id="calculate-the-difference-between-xwoba-and-woba-1" class="level1">
 <h1>Calculate the difference between xwoba and woba</h1>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>atl_diff <span class="ot">&lt;-</span> ATLsaber <span class="sc">|&gt;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">diff =</span> <span class="fu">weighted.mean</span>(xwOBA, PA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span></span>
@@ -275,13 +307,17 @@ dbl (27): Rank, Year, Age, Games, Plate_Appearances, At_Bats, Runs, Hits, Do...
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(diff)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>atl_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.004533479</code></pre>
 </div>
 </div>
 <p>#Now, lets compute the difference between the Padres and Braves</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(woba_diff <span class="sc">-</span> atl_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.0001059264</code></pre>
 </div>
