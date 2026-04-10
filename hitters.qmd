@@ -1,17 +1,19 @@
 ---
-title: "Were the 2023 Padres Hitters Bad or Unlucky?"
+title: "Assessing the 2023 Padres Hitters' luck through wOBA"
 author: "Andrew Cho"
 format: html
-editor: visual
+editor: visuals
 code-fold: true
 theme: darkly
 ---
 
 # Motivation
-The 2023 San Diego Padres rostered, on paper, one of the best offenses in MLB history with players like Juan Soto, Fernando Tatis Jr., Manny Machado, and Xander Bogaerts leading the offense.  A team led by three hall of fame caliber players should not have finished 12 overall in OPS+ at 105.  Was it underperformance by these all-time players, lack of depth, or unluckiness?
+
+The 2023 San Diego Padres rostered, on paper, one of the best offenses in MLB history with players like Juan Soto, Fernando Tatis Jr., Manny Machado, and Xander Bogaerts leading the offense. A team led by three hall of fame caliber players should not have finished 12 overall in OPS+ at 105. Was it underperformance by these all-time players, lack of depth, or unluckiness?
 
 # Methods
-In this doc, I will assess based on xwOBA and wOBA of the 2023 padres (taken weighted averages across the team over PAs) to determine if there was a large gap between wOBA and xwOBA to determine if luck was a factor in the team's failure.  I will also then compare the Padres to the Braves (best offense by OPS+)
+
+In this doc, I will assess based on xwOBA and wOBA of the 2023 padres (taken weighted averages across the team over PAs) to determine if there was a large gap between wOBA and xwOBA to determine if luck was a factor in the team's failure. I will also then compare the Padres to the Braves (best offense by OPS+)
 
 # libraries
 
@@ -21,6 +23,7 @@ library(baseballr)
 ```
 
 # read data
+
 ### obtained via https://www.kaggle.com/datasets/mattop/san-diego-padres-batting-and-pitching-1969-2023?resource=download
 
 ```{r}
@@ -34,12 +37,14 @@ hitterssaber <- fg_batter_leaders(
 ```
 
 # filter basic to only 2023
+
 ```{r}
 basic <- hittersbasic |>
   dplyr::filter(Year == 2023)
 ```
 
 # Plot woba vs xwoba
+
 ```{r}
 pads_plot <- hitterssaber |>
   summarise(
@@ -65,6 +70,7 @@ pads_plot
 ```
 
 # Calculate the difference between xwoba and woba
+
 ```{r}
 woba_diff <- hitterssaber |>
   summarise(
@@ -77,9 +83,11 @@ woba_diff
 ```
 
 # What this means:
+
 So far, it seems like the Padres likely encountered underperformance by their key players and not unluckiness since the difference between xwOBA and wOBA is small, but I will now compare both the Padres' xWOBA and wOBA gaps to the best offense in 2023, the Atlanta Braves.
 
 # Braves import
+
 ```{r}
 ATLbasic <- read_csv("/Users/andrewcho/Documents/personal/SDP_batting.csv")
 ATLsaber <- fg_batter_leaders(
@@ -91,6 +99,7 @@ ATLsaber <- fg_batter_leaders(
 ```
 
 # Braves wOBA plot
+
 ```{r}
 atl_plot <- ATLsaber |>
   summarise(
@@ -116,6 +125,7 @@ atl_plot
 ```
 
 # Calculate the difference between xwoba and woba
+
 ```{r}
 atl_diff <- ATLsaber |>
   summarise(
@@ -134,10 +144,13 @@ print(woba_diff - atl_diff)
 ```
 
 # What this means
+
 The Padres actually had a lower average woba difference between xwOBA and wOBA than the Braves suggesting that the best offense in baseball, the Braves, were actually more unlucky overall than the Padres on the wOBA level.
 
 # Conclusion
-The Padres, based on wOBA and xwOBA, were not unlucky in the 2023 season and thus cannot blame their underperformance on luck.  Next, I would want to look at how the 
+
+The Padres, based on wOBA and xwOBA, were not unlucky in the 2023 season and thus cannot blame their underperformance on luck. Next, I would want to look at how the
 
 # Outtakes:
+
 ggplot, summarise, pivot_longer, weighted_mean, data collection
